@@ -1,17 +1,17 @@
-# WordPress Theme Development with Vite + SCSS + Tailwind
+# WordPress-temautveckling med Vite + SCSS + Tailwind
 
-This setup is a streamlined development environment for WordPress themes using **Vite**, **SCSS**, and **TailwindCSS**. It integrates with a **Dockerized WordPress environment** for seamless local development.
+Det här projektet erbjuder en smidig utvecklingsmiljö för WordPress-teman med hjälp av **Vite**, **SCSS** och **TailwindCSS**. Det integreras med en **Docker-baserad WordPress-miljö** för enkel lokal utveckling.
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Kom igång
 
-### 1. **Set Up Docker**
+### 1. **Ställ in Docker**
 
-Copy the following `docker-compose.yml` file to the root directory where you want to develop your project. This file defines the WordPress environment.
+Kopiera följande `docker-compose.yml`-fil till rotmappen där du vill utveckla ditt projekt. Den här filen definierar WordPress-miljön.
 
 <details>
-<summary>Click to view the `docker-compose.yml` file</summary>
+<summary>Klicka för att visa `docker-compose.yml`-filen</summary>
 
 ```yaml
 services:
@@ -64,71 +64,72 @@ volumes:
 
 ---
 
-### 2. **Clone the Theme Repository**
+### 2. **Klona temarepositoryt**
 
-Navigate to your `themes` folder in the WordPress installation and create a new folder with your desired theme name. Clone this repository into that folder:
+Navigera till din `themes`-mapp i WordPress-installationen och skapa en ny mapp med önskat temanamn. Klona det här repositoryt i den mappen:
 
 ```bash
-git clone <repository-url> your-theme-name
+git clone <repository-url> ditt-tema-namn
 ```
 
 ---
 
-### 3. **Install Dependencies**
+### 3. **Installera beroenden**
 
-Navigate to your theme directory and install the required dependencies:
+I temamappen finns en separat `vite`-mapp där alla Vite-relaterade filer ligger. Navigera till den mappen och installera de nödvändiga beroendena:
 
 ```bash
+cd ditt-tema-namn/vite
 npm install
 ```
 
 ---
 
-### 4. **Start the Development Environment**
+### 4. **Starta utvecklingsmiljön**
 
-Run the following command to start the Docker containers and the Vite development server:
+Kör följande kommando från `vite`-mappen för att starta Docker-containrarna och Vite-utvecklingsservern:
 
 ```bash
 npm run docker-dev
 ```
 
-- This command:
-  1. Starts the Docker containers using the `docker-compose.yml` file.
-  2. Runs the Vite development server.
+- Detta kommando:
+  1. Startar Docker-containrarna med `docker-compose.yml`.
+  2. Startar Vite-utvecklingsservern.
 
-Once everything is up and running, you can visit:
+När allt är igång kan du besöka:
 
-- WordPress site: [http://localhost:8000](http://localhost:8000)
+- WordPress-sidan: [http://localhost:8000](http://localhost:8000)
 - phpMyAdmin: [http://localhost:8080](http://localhost:8080)
 
 ---
 
-### 5. **Build for Production**
+### 5. **Bygg för produktion**
 
-When you're ready to deploy your theme, build the assets:
+När du är redo att distribuera ditt tema, bygg dina tillgångar:
 
 ```bash
 npm run build
 ```
 
-This bundles your files into the `assets/` folder in the theme directory.
+Detta paketerar dina filer i `assets/`-mappen i temamappen.
 
 ---
 
-## 📝 Things to Keep in Mind
+## 📝 Saker att tänka på
 
-### Dynamic CSS Loading
+### Dynamisk CSS-laddning
 
-The theme dynamically serves CSS via the Vite server during development. This is configured in the `functions.php` file.
+Temat laddar CSS dynamiskt via Vite-servern under utveckling. Detta konfigureras i `functions.php` som ligger direkt i temamappen.
 
-- **Development**: Serves files from the Vite dev server.
-- **Production**: Uses bundled files from the `assets/` folder.
-  - Ensure you set `WORDPRESS_ENV` to `production` in the `docker-compose.yml`.
-  - Run `npm run build` before deploying.
+- **Utveckling**: Filer serveras från Vite-utvecklingsservern.
+- **Produktion**: Filer används från `assets/`-mappen.
+  - Kontrollera att `WORDPRESS_ENV` är satt till `production` i `docker-compose.yml`.
+  - Kör `npm run build` innan du distribuerar.
 
-### Adding CSS Files
+### Lägga till CSS-filer
 
-To include additional CSS files, import them into `main.js`:
+För att inkludera ytterligare CSS-filer, importera dem i `main.js` i `vite`-mappen:
 
 ```javascript
 import "./styles/extra.css";
@@ -136,39 +137,43 @@ import "./styles/extra.css";
 
 ---
 
-## 📂 Folder Structure
+## 📂 Projektstruktur
 
-Here’s an overview of the project structure:
+En uppdaterad översikt över projektstrukturen:
 
 ```
-project-root/
-├── docker-compose.yml        # Docker configuration
-├── wordpress/                # WordPress installation (Docker volume)
+projekt-root/
+├── docker-compose.yml        # Docker-konfiguration
+├── wordpress/                # WordPress-installation (Docker-volym)
 │   └── wp-content/
 │       └── themes/
-│           └── your-theme/   # Theme directory
-│               ├── src/      # Vite source files
-│               ├── assets/   # Built files for production
-│               ├── package.json
-│               ├── vite.config.js
-│               └── functions.php
+│           └── ditt-tema/    # Temamapp
+│               ├── functions.php       # WordPress-funktioner
+│               ├── style.css           # WordPress temaspecifik CSS
+│               ├── vite/               # Vite-relaterade filer (samt tailwind.config etc.)
+│               │   ├── src/            # Vite-källfiler
+│               │   ├── assets/         # Produktionsfiler
+│               │   ├── package.json
+│               │   ├── vite.config.js
+│               │   └── main.js
+│               └── övriga temafiler    # Övriga WordPress-filer
 ```
 
 ---
 
-## 🛠 Development Commands
+## 🛠 Utvecklingskommandon
 
-| Command               | Description                                       |
-| --------------------- | ------------------------------------------------- |
-| `npm run docker-dev`  | Starts Docker containers and the Vite dev server. |
-| `npm run dev`         | Starts the Vite dev server only.                  |
-| `npm run build`       | Bundles theme files for production.               |
-| `npm run docker-stop` | Stops and removes Docker containers.              |
+| Kommando              | Beskrivning                                            |
+| --------------------- | ------------------------------------------------------ |
+| `npm run docker-dev`  | Startar Docker-containrar och Vite-utvecklingsservern. |
+| `npm run dev`         | Startar endast Vite-utvecklingsservern.                |
+| `npm run build`       | Paketerar temafiler för produktion.                    |
+| `npm run docker-stop` | Stoppar och tar bort Docker-containrar.                |
 
 ---
 
-## 💡 Tips & Tricks
+## 💡 Tips & tricks
 
-- **phpMyAdmin Access**: Use [http://localhost:8080](http://localhost:8080) to manage the database.
-- **Port Conflicts**: If ports `8000` or `8080` are in use, modify the `docker-compose.yml` file accordingly.
-- **Custom Scripts**: Add additional npm scripts to your `package.json` for common tasks.
+- **phpMyAdmin-åtkomst**: Använd [http://localhost:8080](http://localhost:8080) för att hantera databasen.
+- **Portkonflikter**: Om portarna `8000` eller `8080` redan används, ändra dessa i `docker-compose.yml`.
+- **Egna skript**: Lägg till egna npm-skript i `package.json` för vanliga uppgifter.
