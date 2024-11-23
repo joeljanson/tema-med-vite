@@ -1,0 +1,11 @@
+/*
+Theme Name: Wordpresstema med vite
+Author: Joel Janson Johansen
+Description: Ett tema som visar hur man kan använda Vite tillsammans med sin css för automatisk refresh samt tailwindcss
+Version: 1.0
+Text Domain: wordpresstemamedvite
+*/
+
+p {
+	color: white;
+}
