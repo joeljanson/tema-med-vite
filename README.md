@@ -62,6 +62,12 @@ volumes:
 
 </details>
 
+Kör sedan docker compose up -d för att installera wordpress.
+
+```bash
+docker compose up -d
+```
+
 ---
 
 ### 2. **Klona temarepositoryt**
