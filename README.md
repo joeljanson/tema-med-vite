@@ -69,7 +69,7 @@ volumes:
 Navigera till din `themes`-mapp i WordPress-installationen och skapa en ny mapp med önskat temanamn. Klona det här repositoryt i den mappen:
 
 ```bash
-git clone <repository-url> ditt-tema-namn
+git clone https://github.com/joeljanson/tema-med-vite.git ditt-tema-namn
 ```
 
 ---
