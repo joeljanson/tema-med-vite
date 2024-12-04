@@ -1,4 +1,7 @@
 <?php
+// Include custom file for disabling posts and comments
+require_once get_template_directory() . '/disable-posts-comments.php';
+
 function enqueue_vite_assets()
 {
 	if (defined('WP_ENV') && WP_ENV === 'development') {
